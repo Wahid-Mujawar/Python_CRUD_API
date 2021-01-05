@@ -27,11 +27,16 @@ class Book(db.Model):
 def home():
     return"<h2>Python CRUD Apis<h2>"
 
-@app.route('book/input', methods=['POST'])
+@app.route('/book/input', methods=['POST'])
 def books_input():
-    if request.content_type == 'applications/json':
+    if request.content_type == 'application/json':
         post_data = request.get_json()
         title = post_data.get('title')
         author = post_data.get('author')
+        reg = Book(title, author)
+        db.session.add(reg)
+        db.session.commit()
+        return jsonify('Data Posted')
+    return jsonify('Something went wrong')    
 
 app.run()         
