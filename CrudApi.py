@@ -1,14 +1,14 @@
-flask from import Flask, request, jsonify
-from flask_sqlalchemy import SQALlchemy
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from flask_heroku import flask_heroku
+from flask_heroku import Heroku
 
 app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI']=''
 
 heroku = Heroku(app)
-db = SQALlchemy(app)
+db = SQLAlchemy(app)
 
 class Book(db.Model):
     __tablename__='books'
@@ -26,4 +26,5 @@ class Book(db.Model):
     @app.route("/")
     def home():
         return"<h2>Python CRUD Apis<h2>"
-            
+
+app.run()         
