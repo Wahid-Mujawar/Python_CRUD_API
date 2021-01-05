@@ -23,8 +23,15 @@ class Book(db.Model):
     def __repr__(self):
         return f"Title {self.title}" 
 
-    @app.route("/")
-    def home():
-        return"<h2>Python CRUD Apis<h2>"
+@app.route("/")
+def home():
+    return"<h2>Python CRUD Apis<h2>"
+
+@app.route('book/input', methods=['POST'])
+def books_input():
+    if request.content_type == 'applications/json':
+        post_data = request.get_json()
+        title = post_data.get('title')
+        author = post_data.get('author')
 
 app.run()         
